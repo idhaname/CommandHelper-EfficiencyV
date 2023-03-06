@@ -23,8 +23,8 @@ namespace cbhk_environment.Generators.ItemGenerator.Components
             }
         }
 
-        private string potionDuration;
-        public string PotionDuration
+        private double potionDuration = 0;
+        public double PotionDuration
         {
             get
             {
@@ -36,8 +36,8 @@ namespace cbhk_environment.Generators.ItemGenerator.Components
             }
         }
 
-        private string potionLevel;
-        public string PotionLevel
+        private double potionLevel = 0;
+        public double PotionLevel
         {
             get
             {
@@ -54,8 +54,9 @@ namespace cbhk_environment.Generators.ItemGenerator.Components
             get
             {
                 string result;
-                string id = MainWindow.MobEffectDataBase.Where(item => item.Value.Contains(PotionType.ComboBoxItemText)).Select(item=>item.Key).First();
-                result = "{Id:"+id+"b,Duration:"+PotionDuration+",Amplifier:"+PotionLevel+"b,Ambient:0b,ShowParticles:0b},";
+                string id = MainWindow.MobEffectDataBase.Where(item => item.Value.Contains(PotionType.ComboBoxItemText)).Select(item=>item.Value).First();
+                id = System.Text.RegularExpressions.Regex.Match(id,@"\d+").ToString();
+                result = "{Id:"+id+"b,Duration:"+int.Parse(PotionDuration.ToString()) +",Amplifier:"+int.Parse(PotionLevel.ToString()) +"b,Ambient:0b,ShowParticles:0b},";
                 return result;
             }
         }

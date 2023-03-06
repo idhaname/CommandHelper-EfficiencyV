@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.Input;
-using System.Windows.Media;
 using System.Windows;
-using System.Windows.Media.Imaging;
 
 namespace cbhk_signin
 {
@@ -36,7 +34,6 @@ namespace cbhk_signin
         /// 保存用户的在mc中的id
         /// </summary>
         private string GameID = "";
-        private ImageSource UserFrame = null;
 
         #region 用户账密
         private string userPassword = "";
@@ -172,18 +169,18 @@ namespace cbhk_signin
         {
             FrontWindow = sender as Window;
             //自动登录
-            //SignInTimer.Tick += ThreadTimerCallback;
-            //SignInTimer.IsEnabled = SaveUserPassword;
-            //IsOpenSignIn = !SaveUserPassword;
+            SignInTimer.Tick += ThreadTimerCallback;
+            SignInTimer.IsEnabled = SaveUserPassword;
+            IsOpenSignIn = !SaveUserPassword;
 
             #region 调试
-            FrontWindow.ShowInTaskbar = false;
-            FrontWindow.WindowState = WindowState.Minimized;
-            FrontWindow.Opacity = 0;
-            cbhk_environment.MainWindow CBHK = new cbhk_environment.MainWindow(StatsUserInfomation());
-            CBHK.Topmost = true;
-            CBHK.Show();
-            CBHK.Topmost = false;
+            //FrontWindow.ShowInTaskbar = false;
+            //FrontWindow.WindowState = WindowState.Minimized;
+            //FrontWindow.Opacity = 0;
+            //cbhk_environment.MainWindow CBHK = new cbhk_environment.MainWindow(StatsUserInfomation());
+            //CBHK.Topmost = true;
+            //CBHK.Show();
+            //CBHK.Topmost = false;
             #endregion
         }
 
@@ -204,8 +201,6 @@ namespace cbhk_signin
         private Dictionary<string, string> StatsUserInfomation()
         {
             Dictionary<string, string> user_information = new Dictionary<string, string> { };
-            if(UserFrame != null)
-            user_information.Add("UserFrame", UserFrame.ToString());
             if(UserNameString != "")
             user_information.Add("user_name", UserNameString);
             if(UserID != "")
@@ -225,7 +220,7 @@ namespace cbhk_signin
         {
             UserNameString = result["data"]["name"].ToString();
             UserID = result["data"]["id"].ToString();
-            GameID = result["data"]["mc_id"].ToString();
+            //GameID = result["data"]["mc_id"].ToString();
             return result;
         }
 
@@ -291,15 +286,12 @@ namespace cbhk_signin
             }
             if (result["code"].ToString() == "200")
             {
-                if (result["data"]["DESC"].ToString().Contains("购买了"))
+                if (result["data"] == null)
+                    MessageBox.Show("密码错误");
+                else
                 {
                     if (result["data"]["avatar"].ToString() != null && result["data"]["avatar"].ToString().Contains("?") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + "resources\\user_head.png"))
                         await Task.Run(() => { resources.Tools.SignIn.DownLoadUserHead(result["data"]["avatar"].ToString(), AppDomain.CurrentDomain.BaseDirectory + "resources\\user_head.png"); });
-                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "resources\\user_head.png"))
-                        UserFrame = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "resources\\user_head.png", UriKind.Absolute));
-                    else
-                    if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "resources\\command_block.png"))
-                        UserFrame = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "resources\\command_block.png", UriKind.Absolute));
 
                     FrontWindow.ShowInTaskbar = false;
                     FrontWindow.WindowState = WindowState.Minimized;
@@ -318,15 +310,9 @@ namespace cbhk_signin
                     CBHK.Topmost = false;
                     #endregion
                 }
-                else
-                {
-                    MessageBox.Show("还未购买命令管家...");
-                    //立刻处理Window消息
-                    //Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new ThreadStart(delegate { }));
-                }
             }
             else
-                MessageBox.Show(result["message"].ToString());
+                MessageBox.Show("还未购买命令管家...");
             #endregion
         }
 

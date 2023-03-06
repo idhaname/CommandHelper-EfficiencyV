@@ -52,11 +52,6 @@ namespace cbhk_environment
         /// 生成器背景图索引
         /// </summary>
         private int spawner_backround_index = 0;
-        
-        /// <summary>
-        /// 用户头像
-        /// </summary>
-        private string user_frame_source = "";
 
         //骨架屏计时器
         System.Windows.Forms.Timer SkeletonTimer = new System.Windows.Forms.Timer()
@@ -647,17 +642,17 @@ namespace cbhk_environment
             #endregion
 
             #region 加载用户数据
-            UserData.TryGetValue("user_frame", out user_frame_source);
             //没有头像就加载默认头像
-            if (user_frame_source != null && user_frame_source.Trim() != "")
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "resources\\user_head.png"))
             {
-                user_frame.Source = new BitmapImage(new Uri(user_frame_source, UriKind.Absolute));
+                user_frame.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "resources\\user_head.png", UriKind.Absolute));
             }
             else
             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "resources\\command_block.png"))
             {
                 user_frame.Source = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "resources\\command_block.png", UriKind.RelativeOrAbsolute));
             }
+            user_frame_border.MouseLeftButtonUp += (a,b) => { System.Diagnostics.Process.Start("https://mc.metamo.cn/u/" + UserData["UserID"]); };
             #endregion
 
             #region 加载轮播图数据

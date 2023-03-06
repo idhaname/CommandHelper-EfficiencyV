@@ -45,9 +45,39 @@
         <ImageBrush x:Key="SignInNormal" ImageSource="/cbhk_environment;component/resources/common/images/TextToggleButtonNormal.png" />
         <ImageBrush x:Key="SignInPressed" ImageSource="/cbhk_environment;component/resources/common/images/TextToggleButtonPressed.png" />
         <ImageBrush x:Key="WindowBackground" ImageSource="resources/Images/SigninBackground.png" />
-        <ImageBrush x:Key="LoginMinimize" ImageSource="resources/Images/LoginMinimize.png" />
-        <ImageBrush x:Key="LoginX" ImageSource="resources/Images/LoginX.png" />
+        <DataTemplate x:Key="MinimizeHover">
+            <Grid>
+                <Image
+                    Width="10"
+                    Height="10"
+                    Source="/cbhk_environment;component/resources/common/images/MinimizeHover.png" />
+            </Grid>
+        </DataTemplate>
 
+        <DataTemplate x:Key="CloseHover">
+            <Grid UseLayoutRounding="True">
+                <Image
+                    Width="12"
+                    Height="12"
+                    Source="/cbhk_environment;component/resources/common/images/CloseHover.png" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="MinimizeWhite">
+            <Grid>
+                <Image
+                    Width="12"
+                    Height="12"
+                    Source="/cbhk_environment;component/resources/common/images/Minimize.png" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="CloseBtn">
+            <Grid UseLayoutRounding="True">
+                <Image
+                    Width="12"
+                    Height="12"
+                    Source="/cbhk_environment;component/resources/common/images/Close.png" />
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
 
     <Window.CommandBindings>
@@ -68,22 +98,48 @@
                 Background="Transparent"
                 FlowDirection="RightToLeft"
                 LastChildFill="False">
-                <CustomControls:IconTextButtons
-                    Width="10"
-                    Height="10"
-                    Margin="29,0,0,0"
-                    Background="{StaticResource LoginX}"
+                <Button
+                    Width="13"
+                    Height="13"
+                    Margin="27,-6,0,0"
+                    Background="Transparent"
+                    BorderThickness="0"
                     Command="{x:Static SystemCommands.CloseWindowCommand}"
-                    PressedBackground="{StaticResource LoginX}"
-                    Style="{DynamicResource IconTextButton}" />
-                <CustomControls:IconTextButtons
-                    Width="10"
-                    Height="10"
-                    Margin="13,0,0,0"
-                    Background="{StaticResource LoginMinimize}"
+                    ContentTemplate="{StaticResource CloseBtn}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource CloseHover}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource CloseHover}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Button
+                    Width="12"
+                    Height="12"
+                    Margin="12,0,0,5"
+                    Background="Transparent"
+                    BorderThickness="0"
                     Command="{x:Static SystemCommands.MinimizeWindowCommand}"
-                    PressedBackground="{StaticResource LoginMinimize}"
-                    Style="{DynamicResource IconTextButton}" />
+                    ContentTemplate="{StaticResource MinimizeWhite}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource MinimizeHover}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="ContentTemplate" Value="{StaticResource MinimizeHover}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </DockPanel>
         </StackPanel>
         <StackPanel Margin="0,150,0,0" Background="Transparent">
@@ -99,7 +155,6 @@
                 Margin="120,0"
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Center"
-                Background="#2F2F2F"
                 BorderBrush="Black"
                 BorderThickness="1"
                 FontSize="20"

@@ -25,9 +25,10 @@
             Foreground="White"
             Text="附魔ID" />
         <ComboBox
-            Width="100"
+            Width="110"
             Height="30"
             HorizontalAlignment="Left"
+            VerticalContentAlignment="Center"
             IsEditable="True"
             Loaded="EnchantmentIdLoaded"
             SelectedIndex="0"

@@ -25,6 +25,7 @@
             <ComboBox
                 Width="100"
                 HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
                 Loaded="AttributeIdsLoaded"
                 SelectedIndex="0"
                 SelectedItem="{Binding AttributeID, Mode=TwoWay}"
@@ -38,6 +39,7 @@
             <ComboBox
                 Width="60"
                 HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
                 Loaded="AttributeSlotsLoaded"
                 SelectedIndex="0"
                 SelectedItem="{Binding AttributeSlot, Mode=TwoWay}"
@@ -67,9 +69,10 @@
                 Foreground="White"
                 Text="值类型:" />
             <ComboBox
-                Width="60"
+                Width="100"
                 Height="30"
                 HorizontalAlignment="Left"
+                VerticalContentAlignment="Center"
                 Loaded="AttributeValueTypesLoaded"
                 SelectedIndex="0"
                 SelectedItem="{Binding AttributeValueType, Mode=TwoWay}"

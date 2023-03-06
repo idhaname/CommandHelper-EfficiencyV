@@ -281,16 +281,8 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="CloseWhite">
+    <DataTemplate x:Key="CloseBtn">
         <Grid UseLayoutRounding="True">
-            <!--<Path
-                Width="12"
-                Height="12"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Data="M1,0 L6,5 L11,0 L12,1 L7,6 L12,11 L11,12 L6,7 L1,12 L0,11 L5,6 L0,1 z"
-                Fill="White"
-                UseLayoutRounding="True" />-->
             <Image
                 Width="12"
                 Height="12"
@@ -298,16 +290,11 @@
         </Grid>
     </DataTemplate>
 
+    <!--<ImageBrush x:Key="CloseWhite" ImageSource="/cbhk_environment;component/resources/common/images/Close.png" />-->
+    <!--<ImageBrush x:Key="MinimizeHover" ImageSource="/cbhk_environment;component/resources/common/images/MinimizeHover.png" />-->
+
     <DataTemplate x:Key="MaximizeWhite">
         <Grid>
-            <!--<Path
-                Width="12"
-                Height="12"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Data="M1,1  L1 ,11 L11,11 L11,1 z M0,0 L12,0 L12,12 L0,12 z"
-                Fill="White"
-                UseLayoutRounding="True" />-->
             <Image
                 Width="12"
                 Height="12"
@@ -317,14 +304,6 @@
 
     <DataTemplate x:Key="MinimizeWhite">
         <Grid>
-            <!--<Path
-                Width="12"
-                Height="12"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Data="M0,5 L12,5 L12,6 L0,6 z"
-                Fill="White"
-                UseLayoutRounding="True" />-->
             <Image
                 Width="12"
                 Height="12"
@@ -332,12 +311,14 @@
         </Grid>
     </DataTemplate>
 
+    <!--<ImageBrush x:Key="MinimizeWhite" ImageSource="/cbhk_environment;component/resources/common/images/Minimize.png" />-->
+
     <DataTemplate x:Key="MinimizeHover">
         <Grid>
             <Image
                 Width="10"
                 Height="10"
-                Source="/practiseWPF;component/Images/MinimizeHover.png" />
+                Source="/cbhk_environment;component/resources/common/images/MinimizeHover.png" />
         </Grid>
     </DataTemplate>
 
@@ -346,9 +327,11 @@
             <Image
                 Width="12"
                 Height="12"
-                Source="/practiseWPF;component/Images/CloseHover.png" />
+                Source="/cbhk_environment;component/resources/common/images/CloseHover.png" />
         </Grid>
     </DataTemplate>
+
+    <!--<ImageBrush x:Key="CloseHover" ImageSource="/cbhk_environment;component/resources/common/images/CloseHover.png" />-->
 
     <Style x:Key="TitleBarButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="Focusable" Value="True" />
@@ -519,6 +502,7 @@
                                         <ColumnDefinition Width="10*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>-->
+                                <!--  ContentTemplate="{StaticResource MinimizeWhite}"  -->
                                 <Button
                                     x:Name="Minimize"
                                     Width="15"
@@ -582,7 +566,7 @@
                                     Background="Transparent"
                                     BorderThickness="0"
                                     Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
-                                    ContentTemplate="{StaticResource CloseWhite}"
+                                    ContentTemplate="{StaticResource CloseBtn}"
                                     IsTabStop="False"
                                     WindowChrome.IsHitTestVisibleInChrome="True">
                                     <Button.Style>

@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace cbhk_signin.resources.Tools
@@ -102,16 +103,13 @@ namespace cbhk_signin.resources.Tools
 		}
 		public static string GetDataByPost(string url, string account, string password)
 		{
-			//0e805eb9ea5b2d7a266f29af992704c9
-			//d984e4ac-191a-4fe6-a2df-31ee226402f3
-			//string content = "account=" + account + "&password=" + password + "&key=d984e4ac-191a-4fe6-a2df-31ee226402f3";
-			string content = "https://mc.metamo.cn/api/market/open/buyerQuery?token=0e805eb9ea5b2d7a266f29af992704c9&email="+account;
+			string content = "https://mc.metamo.cn/api/market/open/verifyEmail?token=0e805eb9ea5b2d7a266f29af992704c9&email="+account+"&password="+password;
 
 			using (WebClient webClient = new WebClient())
 			{
 				webClient.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded; charset=utf-8";
-				string result = webClient.UploadString(url, content);
-				Console.WriteLine(result);
+				string result = webClient.DownloadString(content);
+				//string result = webClient.UploadString(url, content);
 				return result;
 			}
 		}

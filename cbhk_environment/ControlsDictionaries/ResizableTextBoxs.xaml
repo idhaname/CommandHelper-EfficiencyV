@@ -39,17 +39,16 @@
                                 <RowDefinition />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-
                             <ScrollViewer
                                 x:Name="PART_ContentHost"
                                 Focusable="false"
-                                HorizontalScrollBarVisibility="Hidden"
                                 RenderOptions.BitmapScalingMode="NearestNeighbor"
                                 RenderOptions.ClearTypeHint="Enabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto"
                                 SnapsToDevicePixels="True"
                                 Style="{StaticResource DefaultScrollViewer}"
-                                UseLayoutRounding="True"
-                                VerticalScrollBarVisibility="Hidden" />
+                                UseLayoutRounding="True" />
                             <Grid
                                 x:Name="resizeGripGrid"
                                 Grid.Row="1"

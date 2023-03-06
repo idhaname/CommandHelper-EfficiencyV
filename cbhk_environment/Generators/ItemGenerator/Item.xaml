@@ -202,14 +202,17 @@
                             <TextBox
                                 Width="340"
                                 MinWidth="50"
-                                MinHeight="20"
+                                MinHeight="30"
                                 MaxWidth="340"
                                 Margin="0,5,10,5"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center"
+                                VerticalContentAlignment="Center"
                                 BorderBrush="Black"
+                                FontSize="15"
+                                Foreground="White"
                                 Style="{DynamicResource ResizableTextBoxStyle}"
-                                Text="{Binding CustomTag, Mode=TwoWay}" />
+                                Text="Text" />
                             <CustomControls:IconCheckBoxs
                                 Width="90"
                                 HorizontalAlignment="Left"

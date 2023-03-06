@@ -94,7 +94,7 @@ namespace cbhk_environment.Generators.EntityGenerator.Components
             {
                 IconComboBoxItem comboBoxItem = EffectID.SelectedItem as IconComboBoxItem;
                 EffectIdString = MainWindow.MobEffectDataBase.Where(item => Regex.Match(item.Value, @"[\u4E00-\u9FFF]+").ToString() == comboBoxItem.ComboBoxItemText).First().Value;
-                EffectIdString = Regex.Match(EffectIdString, @"[\d]+").ToString();
+                EffectIdString = Regex.Match(EffectIdString, @"\d+").ToString();
             }
         }
     }
